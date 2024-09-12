@@ -8,13 +8,11 @@ st.title("🪐 NASA ML Application 🪐")
 
 st.info(
     """
-    **Explore the Wonders and Dangers of Space!**\\
-    The universe is full of celestial bodies, but some come perilously close to Earth. These are known as **N.E.O.s - Near Earth Objects**. 
-    While most of these space wanderers harmlessly pass by, a few are classified as *hazardous* by NASA, posing potential threats to our planet.  
-    Dive into the data and uncover the history of these fascinating objects, from their first recorded observation in 1910 to the present day.
+    **Discover Space's Close Encounters!**\\
+    Near Earth Objects (N.E.O.s) are celestial bodies that come close to Earth. While most are harmless, some are tagged by NASA as *hazardous*. 
+    Explore their history, from the first recorded sighting in 1910 to today.
     """
 )
-
 
 df = pd.read_csv("https://raw.githubusercontent.com/mateuszwalo/NASA_app/master/Nasa_clean_v2.csv")
 
