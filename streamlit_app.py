@@ -9,5 +9,5 @@ st.info('This application will allow you to do EDA and predict the threat to Ear
 df=pd.read_csv("https://raw.githubusercontent.com/mateuszwalo/NASA_app/master/Nasa_clean.csv")
 
 with st.expander("Data"):
-  st.wrtie("**Overwiev of dataset from NASA**")
+  st.write("**Overwiev of dataset from NASA**")
   df
