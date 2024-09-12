@@ -65,63 +65,18 @@ with st.expander("📈 Data Visualization 📈"):
             st.plotly_chart(fig)
 
 with st.expander("🎯 Statistics 🎯"):
-    stat_options = ["Correlation Matrix", "Statistical Tests", "Descriptive Statistics", "Probability Distributions"]
+    stat_options = ["Correlation Matrix", "Descriptive Statistics"]
     selected_stat = st.selectbox("Choose statistical analysis", stat_options)
 
     if selected_stat == "Correlation Matrix":
         st.subheader("Correlation Matrix")
         correlation_matrix = df.corr()
         st.write(correlation_matrix)
-        fig = px.imshow(correlation_matrix, color_continuous_scale='Viridis', title="Correlation Matrix")
+        fig = px.imshow(correlation_matrix.round(2), color_continuous_scale='Viridis', title="Correlation Matrix",text_auto=True)
         st.plotly_chart(fig)
-
-    elif selected_stat == "Statistical Tests":
-        st.subheader("Statistical Tests")
-        test_type = st.selectbox("Choose test", ["Normality Test", "T-Test", "ANOVA", "Chi-Square Test"])
-        
-        if test_type == "Normality Test":
-            column = st.selectbox("Choose column for Normality Test", df.columns)
-            if column:
-                stat, p_value = stats.shapiro(df[column].dropna())
-                st.write(f"Shapiro-Wilk Test Statistic: {stat}")
-                st.write(f"P-Value: {p_value}")
-        
-        elif test_type == "T-Test":
-            column1 = st.selectbox("Choose first column for T-Test", df.columns)
-            column2 = st.selectbox("Choose second column for T-Test", df.columns)
-            if column1 and column2:
-                t_stat, p_value = stats.ttest_ind(df[column1].dropna(), df[column2].dropna())
-                st.write(f"T-Statistic: {t_stat}")
-                st.write(f"P-Value: {p_value}")
-        
-        elif test_type == "ANOVA":
-            column = st.selectbox("Choose column for ANOVA", df.columns)
-            group = st.selectbox("Choose group column", df.columns)
-            if column and group:
-                groups = df.groupby(group)[column].apply(list)
-                f_stat, p_value = stats.f_oneway(*groups)
-                st.write(f"ANOVA F-Statistic: {f_stat}")
-                st.write(f"P-Value: {p_value}")
-        
-        elif test_type == "Chi-Square Test":
-            observed = st.text_input("Enter observed frequencies (comma-separated)", "")
-            expected = st.text_input("Enter expected frequencies (comma-separated)", "")
-            if observed and expected:
-                observed = np.array(list(map(int, observed.split(','))))
-                expected = np.array(list(map(int, expected.split(','))))
-                chi2_stat, p_value = stats.chisquare(observed, expected)
-                st.write(f"Chi-Square Statistic: {chi2_stat}")
-                st.write(f"P-Value: {p_value}")
 
     elif selected_stat == "Descriptive Statistics":
         st.subheader("Descriptive Statistics")
         column = st.selectbox("Choose column for Descriptive Statistics", df.columns)
         if column:
             st.write(df[column].describe())
-
-    elif selected_stat == "Probability Distributions":
-        st.subheader("Probability Distributions")
-        column = st.selectbox("Choose column for Probability Distribution", df.columns)
-        if column:
-            fig = px.histogram(df, x=column, marginal="box", title=f"Distribution of {column}")
-            st.plotly_chart(fig)
