@@ -25,6 +25,7 @@ with st.expander("🔍 View NASA's Data 🔍"):
 
 with st.expander("Data Visualization"):
     num_bins = st.slider("Number of bins", min_value=10, max_value=100, value=50)
+    selected_column = st.selectbox("Choose column", df.columns)
     if selected_column:
         fig = px.histogram(
             df, 
