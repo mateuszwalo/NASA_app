@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 
 st.title("🪐 NASA ML Application 🪐")
 
@@ -15,13 +16,16 @@ st.info(
 )
 
 df = pd.read_csv("https://raw.githubusercontent.com/mateuszwalo/NASA_app/master/Nasa_clean_v2.csv")
+X=df.drop("is_hazardous",axis=1)
+y=df["is_hazardous"]
 
 with st.expander("🔍 View NASA's Data Records"):
     st.write("**Explore NASA's extensive database, documenting every recorded N.E.O. from 1910 to 2024.**")
     st.dataframe(df)
-    st.write("**Features**")
-    X=df.drop("is_hazardous",axis=1)
-    X
-    st.write("Target")
-    y=df["is_hazardous"]
-    y
+    
+st.sidebar.header("Wybierz zmienną do histogramu")
+    selected_column = st.sidebar.selectbox("Wybierz kolumnę", df.columns)
+    if selected_column:
+        fig = px.histogram(df, x=selected_column, title=f'Histogram kolumny: {selected_column}')
+        st.plotly_chart(fig)
+
