@@ -62,7 +62,7 @@ with st.expander("📈 Data Visualization 📈"):
             st.plotly_chart(fig)
             
     elif selected_plot_type == "Bar Plot":
-        column = st.selectbox("Choose column for Bar Plot", df.columns)
+        column = st.selectbox("Choose column for Bar Plot", y.columns)
         fig = px.bar(
             df,
             x=column,
