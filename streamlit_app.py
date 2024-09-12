@@ -5,6 +5,21 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url('https://images.unsplash.com/photo-1506748686214e9df14f1d2e1d7c4db2d5d8efb7f4e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGdyYW5kIG5vcnRoJTIwb2ZmaWNl&ixlib=rb-1.2.1&q=80&w=1080');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("🪐 NASA ML Application 🪐")
 
 st.info(
