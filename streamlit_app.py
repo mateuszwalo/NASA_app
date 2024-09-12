@@ -23,10 +23,9 @@ with st.expander("🔍 View NASA's Data Records"):
     st.write("**Explore NASA's extensive database, documenting every recorded N.E.O. from 1910 to 2024.**")
     st.dataframe(df)
 
-
- with st.expander("Data Visualization"):
+with st.expander("📈 Data Visualization 📈"):
     selected_column = st.selectbox("Choose column", df.columns)
     if selected_column:
-        fig = px.histogram(df, x=selected_column, title=f'Histogram kolumny: {selected_column}')
+        fig = px.histogram(df, x=selected_column, title=f'Histogram for: {selected_column}')
         st.plotly_chart(fig)
 
