@@ -5,23 +5,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url('https://images.unsplash.com/photo-1604079685871-e34d58ae4d6d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGdyYW5kIG5vcnRoJTIwb2ZmaWNl&ixlib=rb-1.2.1&q=80&w=1080');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        height: 100vh; /* Ensure the background covers the entire viewport height */
-        margin: 0;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 st.title("🪐 NASA ML Application 🪐")
 
 st.info(
@@ -79,4 +62,5 @@ with st.expander("📈 Data Visualization 📈"):
             )
             fig.update_traces(marker_color='purple')
             st.plotly_chart(fig)
+
 
