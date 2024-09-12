@@ -19,7 +19,7 @@ df = pd.read_csv("https://raw.githubusercontent.com/mateuszwalo/NASA_app/master/
 X=df.drop("is_hazardous",axis=1)
 y=df["is_hazardous"]
 
-with st.expander("🔍 View NASA's Data Records"):
+with st.expander("🔍 View NASA's Data 🔍"):
     st.write("**Explore NASA's extensive database, documenting every recorded N.E.O. from 1910 to 2024.**")
     st.dataframe(df)
 
