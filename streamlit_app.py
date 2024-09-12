@@ -69,8 +69,9 @@ with st.expander("🎯 Statistics 🎯"):
     selected_stat = st.selectbox("Choose statistical analysis", stat_options)
 
     if selected_stat == "Correlation Matrix":
+        cm=df.corr()
         st.subheader("Correlation Matrix")
-        fig = px.imshow(correlation_matrix.round(2), color_continuous_scale='Viridis',text_auto=True)
+        fig = px.imshow(cm.round(2), color_continuous_scale='Viridis',text_auto=True)
         st.plotly_chart(fig)
 
     elif selected_stat == "Descriptive Statistics":
