@@ -25,13 +25,12 @@ with st.expander("🔍 View NASA's Data 🔍"):
 
 with st.expander("Data Visualization"):
     num_bins = st.slider("Number of bins", min_value=10, max_value=100, value=50)
-    color_column = st.selectbox("Choose color column (optional)", [None] + list(df.columns))
     if selected_column:
         fig = px.histogram(
             df, 
             x=selected_column, 
             nbins=num_bins, 
-            color=color_column,
+            color="purple",
             title=f'Histogram for: {selected_column}'
         )
         st.plotly_chart(fig)
