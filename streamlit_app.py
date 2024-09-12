@@ -23,9 +23,16 @@ with st.expander("🔍 View NASA's Data 🔍"):
     st.write("**Explore NASA's extensive database, documenting every recorded N.E.O. from 1910 to 2024.**")
     st.dataframe(df)
 
-with st.expander("📈 Data Visualization 📈"):
-    selected_column = st.selectbox("Choose column", df.columns)
+with st.expander("Data Visualization"):
+    num_bins = st.slider("Number of bins", min_value=10, max_value=100, value=50)
+    color_column = st.selectbox("Choose color column (optional)", [None] + list(df.columns))
     if selected_column:
-        fig = px.histogram(df, x=selected_column, color="purple", nbins=50,title=f'Histogram for: {selected_column}')
+        fig = px.histogram(
+            df, 
+            x=selected_column, 
+            nbins=num_bins, 
+            color=color_column,
+            title=f'Histogram for: {selected_column}'
+        )
         st.plotly_chart(fig)
 
