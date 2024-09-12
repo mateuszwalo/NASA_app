@@ -26,6 +26,6 @@ with st.expander("🔍 View NASA's Data 🔍"):
 with st.expander("📈 Data Visualization 📈"):
     selected_column = st.selectbox("Choose column", df.columns)
     if selected_column:
-        fig = px.histogram(df, x=selected_column, title=f'Histogram for: {selected_column}')
+        fig = px.histogram(df, x=selected_column, bins=50,title=f'Histogram for: {selected_column}')
         st.plotly_chart(fig)
 
