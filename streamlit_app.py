@@ -34,8 +34,9 @@ with st.expander("📈 Data Visualization 📈"):
                 df, 
                 x=selected_column, 
                 nbins=num_bins,
-                title=f'Histogram for: {selected_column}'
+                title=f'Histogram for: {selected_column}',
             )
+            fig.update_traces(marker_color='purple')
             st.plotly_chart(fig)
     elif selected_plot_type == "Box Plot":
         selected_column = st.selectbox("Choose column for Box Plot", df.columns)
