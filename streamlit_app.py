@@ -23,15 +23,41 @@ with st.expander("🔍 View NASA's Data 🔍"):
     st.write("**Explore NASA's extensive database, documenting every recorded N.E.O. from 1910 to 2024.**")
     st.dataframe(df)
 
-with st.expander("Data Visualization"):
-    num_bins = st.slider("Number of bins", min_value=10, max_value=100, value=50)
-    selected_column = st.selectbox("Choose column", df.columns)
-    if selected_column:
-        fig = px.histogram(
-            df, 
-            x=selected_column, 
-            nbins=num_bins,
-            title=f'Histogram for: {selected_column}'
-        )
-        st.plotly_chart(fig)
+plots_type = ["Histogram", "Box Plot", "Scatter Plot"]  
+
+with st.expander("📈 Data Visualization 📈"):
+    selected_plot_type = st.selectbox("Choose type of plot", plots_type)
+    if selected_plot_type == "Histogram":
+        num_bins = st.slider("Number of bins", min_value=10, max_value=100, value=50)
+        selected_column = st.selectbox("Choose column", df.columns)
+        if selected_column:
+            fig = px.histogram(
+                df, 
+                x=selected_column, 
+                nbins=num_bins,
+                title=f'Histogram for: {selected_column}'
+            )
+            st.plotly_chart(fig)
+    elif selected_plot_type == "Box Plot":
+        selected_column = st.selectbox("Choose column for Box Plot", df.columns)
+        if selected_column:
+            fig = px.box(
+                df, 
+                y=selected_column,
+                title=f'Box Plot for: {selected_column}'
+            )
+            st.plotly_chart(fig)
+    
+    elif selected_plot_type == "Scatter Plot":
+        x_column = st.selectbox("Choose x-axis column for Scatter Plot", df.columns)
+        y_column = st.selectbox("Choose y-axis column for Scatter Plot", df.columns)
+        
+        if x_column and y_column:
+            fig = px.scatter(
+                df, 
+                x=x_column, 
+                y=y_column,
+                title=f'Scatter Plot: {x_column} vs {y_column}'
+            )
+            st.plotly_chart(fig)
 
