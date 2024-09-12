@@ -29,8 +29,7 @@ with st.expander("Data Visualization"):
         fig = px.histogram(
             df, 
             x=selected_column, 
-            nbins=num_bins, 
-            color="purple",
+            nbins=num_bins,
             title=f'Histogram for: {selected_column}'
         )
         st.plotly_chart(fig)
