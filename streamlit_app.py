@@ -23,6 +23,9 @@ y=df["is_hazardous"]
 with st.expander("🔍 View NASA's Data 🔍"):
     st.write("**Explore NASA's extensive database, documenting every recorded N.E.O. from 1910 to 2024.**")
     st.dataframe(df)
+
+with st.explainder("📡 Features Descriptions 📡"):
+    st.write("**...**")
  
 with st.expander("📈 Data Visualization 📈"):
     plots_type = ["Histogram", "Box Plot", "Scatter Plot"] 
