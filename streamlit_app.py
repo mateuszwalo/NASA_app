@@ -70,9 +70,7 @@ with st.expander("🎯 Statistics 🎯"):
 
     if selected_stat == "Correlation Matrix":
         st.subheader("Correlation Matrix")
-        correlation_matrix = df.corr()
-        st.write(correlation_matrix)
-        fig = px.imshow(correlation_matrix.round(2), color_continuous_scale='Viridis', title="Correlation Matrix",text_auto=True)
+        fig = px.imshow(correlation_matrix.round(2), color_continuous_scale='Viridis',text_auto=True)
         st.plotly_chart(fig)
 
     elif selected_stat == "Descriptive Statistics":
