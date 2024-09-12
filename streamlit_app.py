@@ -46,6 +46,7 @@ with st.expander("📈 Data Visualization 📈"):
                 y=selected_column,
                 title=f'Box Plot for: {selected_column}'
             )
+            fig.update_traces(marker_color='purple')
             st.plotly_chart(fig)
     
     elif selected_plot_type == "Scatter Plot":
@@ -59,5 +60,6 @@ with st.expander("📈 Data Visualization 📈"):
                 y=y_column,
                 title=f'Scatter Plot: {x_column} vs {y_column}'
             )
+            fig.update_traces(marker_color='purple')
             st.plotly_chart(fig)
 
