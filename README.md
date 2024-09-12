@@ -1,13 +1,10 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
+# 🪐 NASA Machine Learning app 
 
-Description of the app ...
+This application will allow you to do EDA and predict the threat to Earth thanks to machine learning models
 
 ## Demo App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-starter-kit.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://NASA_app.streamlit.app/)
 
 ## GitHub Codespaces
 
