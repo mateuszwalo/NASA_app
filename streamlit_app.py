@@ -11,6 +11,9 @@ from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score, auc
 from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
 
 def model_evaluation(classifier, x_test, y_test):
     from sklearn.linear_model import LogisticRegression
@@ -25,6 +28,21 @@ def model_evaluation(classifier, x_test, y_test):
     plt.title('Confusion Matrix')
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
+    st.pyplot(plt)
+
+def plot_roc_curve(y_test, y_pred_proba):
+    fpr, tpr, _ = roc_curve(y_test, y_pred_proba)
+    roc_auc = auc(fpr, tpr)
+    
+    plt.figure(figsize=(8, 6))
+    plt.plot(fpr, tpr, color='purple', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+    plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--')
+    plt.xlim([0.0, 1.0])
+    plt.ylim([0.0, 1.05])
+    plt.xlabel('False Positive Rate')
+    plt.ylabel('True Positive Rate')
+    plt.title('Receiver Operating Characteristic')
+    plt.legend(loc="lower right")
     st.pyplot(plt)
 
 st.title("🪐 NASA ML Application 🪐")
@@ -103,44 +121,109 @@ with st.expander("🎯 Statistics 🎯"):
         column = st.selectbox("Choose column for Descriptive Statistics", df.columns)
         if column:
             st.write(df[column].describe())
-            
+
+
 with st.expander("⚙️ Model training ⚙️"):
     st.info(
         "In this section, you can train your custom model to predict NEOs (Near-Earth Objects). "
         "Due to the imbalanced target, SMOTE was used to upsample the minority class, and the data has been standardized for better model performance."
     )
     
-    # Podział danych na zestawy treningowy i testowy
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
     
-    # Użycie SMOTE do zrównoważenia klas
     smote = SMOTE(k_neighbors=3, random_state=10)
     X_train, y_train = smote.fit_resample(X_train, y_train)
     
-    # Standaryzacja danych
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
     X_test = scaler.transform(X_test)
     
-    # Wybór modelu
     models = ["Decision Tree", "Random Forest", "XGB Classifier", "Logistic Regression"]
     selected_model = st.selectbox("Choose model", models)
     
-    if selected_model == "Logistic Regression":
-        st.subheader("Logistic Regression - Model Configuration")
+    if selected_model == "Decision Tree":
+        st.subheader("Decision Tree - Model Configuration")
+        max_depth = st.slider("Max Depth", min_value=1, max_value=20, value=3, step=1)
+        min_samples_split = st.slider("Min Samples Split", min_value=2, max_value=20, value=2, step=1)
+        min_samples_leaf = st.slider("Min Samples Leaf", min_value=1, max_value=20, value=1, step=1)
         
-        # Konfiguracja parametrów modelu przez użytkownika
+        dt = DecisionTreeClassifier(max_depth=max_depth, min_samples_split=min_samples_split, min_samples_leaf=min_samples_leaf, random_state=42)
+        dt.fit(X_train, y_train)
+        y_pred_dt = dt.predict(X_test)
+        
+        Accuracy_dt = accuracy_score(y_test, y_pred_dt)
+        F1_dt = f1_score(y_test, y_pred_dt)
+        Kappa_dt = cohen_kappa_score(y_test, y_pred_dt)
+        
+        st.subheader("Decision Tree - Evaluation Metrics")
+        st.write(f"**Accuracy in Decision Tree =** {Accuracy_dt}")
+        st.write(f"**F1 in Decision Tree =** {F1_dt}")
+        st.write(f"**Kappa in Decision Tree =** {Kappa_dt}")
+        
+        model_evaluation(dt, X_test, y_test)
+        
+        y_pred_proba_dt = dt.predict_proba(X_test)[:, 1]
+        plot_roc_curve(y_test, y_pred_proba_dt)
+    
+    elif selected_model == "Random Forest":
+        st.subheader("Random Forest - Model Configuration")
+        n_estimators = st.slider("Number of Estimators", min_value=10, max_value=300, value=100, step=10)
+        max_depth = st.slider("Max Depth", min_value=1, max_value=20, value=3, step=1)
+        min_samples_split = st.slider("Min Samples Split", min_value=2, max_value=20, value=2, step=1)
+        
+        rf = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, min_samples_split=min_samples_split, random_state=42)
+        rf.fit(X_train, y_train)
+        y_pred_rf = rf.predict(X_test)
+        
+        Accuracy_rf = accuracy_score(y_test, y_pred_rf)
+        F1_rf = f1_score(y_test, y_pred_rf)
+        Kappa_rf = cohen_kappa_score(y_test, y_pred_rf)
+        
+        st.subheader("Random Forest - Evaluation Metrics")
+        st.write(f"**Accuracy in Random Forest =** {Accuracy_rf}")
+        st.write(f"**F1 in Random Forest =** {F1_rf}")
+        st.write(f"**Kappa in Random Forest =** {Kappa_rf}")
+        
+        model_evaluation(rf, X_test, y_test)
+        
+        y_pred_proba_rf = rf.predict_proba(X_test)[:, 1]
+        plot_roc_curve(y_test, y_pred_proba_rf)
+    
+    elif selected_model == "XGB Classifier":
+        st.subheader("XGB Classifier - Model Configuration")
+        n_estimators = st.slider("Number of Estimators", min_value=10, max_value=300, value=100, step=10)
+        max_depth = st.slider("Max Depth", min_value=1, max_value=20, value=3, step=1)
+        learning_rate = st.slider("Learning Rate", min_value=0.01, max_value=0.5, value=0.1, step=0.01)
+        
+        xgb = XGBClassifier(n_estimators=n_estimators, max_depth=max_depth, learning_rate=learning_rate, random_state=42)
+        xgb.fit(X_train, y_train)
+        y_pred_xgb = xgb.predict(X_test)
+        
+        Accuracy_xgb = accuracy_score(y_test, y_pred_xgb)
+        F1_xgb = f1_score(y_test, y_pred_xgb)
+        Kappa_xgb = cohen_kappa_score(y_test, y_pred_xgb)
+        
+        st.subheader("XGB Classifier - Evaluation Metrics")
+        st.write(f"**Accuracy in XGB Classifier =** {Accuracy_xgb}")
+        st.write(f"**F1 in XGB Classifier =** {F1_xgb}")
+        st.write(f"**Kappa in XGB Classifier =** {Kappa_xgb}")
+        
+        model_evaluation(xgb, X_test, y_test)
+        
+        y_pred_proba_xgb = xgb.predict_proba(X_test)[:, 1]
+        plot_roc_curve(y_test, y_pred_proba_xgb)
+    
+    elif selected_model == "Logistic Regression":
+        st.subheader("Logistic Regression - Model Configuration")
         c_value = st.slider("C (Inverse of regularization strength)", min_value=0.01, max_value=10.0, value=1.0, step=0.01)
         max_iter_ = st.slider("Maximum Iterations", min_value=50, max_value=500, value=100, step=10)
         solver_ = st.selectbox("Solver", ["lbfgs", "liblinear", "sag", "saga"])
         
         try:
-            # Trenowanie modelu
             lr = LogisticRegression(C=c_value, max_iter=max_iter_, solver=solver_, random_state=42)
             lr.fit(X_train, y_train)
             y_pred_lr = lr.predict(X_test)
             
-            # Obliczenie metryk
             Accuracy_lr = accuracy_score(y_test, y_pred_lr)
             F1_lr = f1_score(y_test, y_pred_lr)
             Kappa_lr = cohen_kappa_score(y_test, y_pred_lr)
@@ -150,26 +233,14 @@ with st.expander("⚙️ Model training ⚙️"):
             st.write(f"**F1 in Logistic Regression =** {F1_lr}")
             st.write(f"**Kappa in Logistic Regression =** {Kappa_lr}")
             
-            # Wizualizacja macierzy pomyłek
             model_evaluation(lr, X_test, y_test)
             
-            # Krzywa ROC i AUC
-            st.subheader("ROC Curve and AUC")
             y_pred_proba_lr = lr.predict_proba(X_test)[:, 1]
-            fpr, tpr, _ = roc_curve(y_test, y_pred_proba_lr)
-            roc_auc = auc(fpr, tpr)
-            
-            plt.figure(figsize=(8, 6))
-            plt.plot(fpr, tpr, color='purple', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
-            plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--')
-            plt.xlim([0.0, 1.0])
-            plt.ylim([0.0, 1.05])
-            plt.xlabel('False Positive Rate')
-            plt.ylabel('True Positive Rate')
-            plt.title('Receiver Operating Characteristic')
-            plt.legend(loc="lower right")
-            st.pyplot(plt)
+            plot_roc_curve(y_test, y_pred_proba_lr)
         
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
+            
+
+
 
