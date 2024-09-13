@@ -8,18 +8,27 @@ from scipy import stats
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
-
-#Przydatne funkcje do ewaluacji modelu
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score
 
-def model_evaluation(classifier,x_test,y_test):
-    cm = confusion_matrix(y_test,classifier.predict(x_test))
-    names = ['True Neg','False Pos','False Neg','True Pos']
+def model_evaluation(classifier, x_test, y_test):
+    cm = confusion_matrix(y_test, classifier.predict(x_test))
+    names = ['True Neg', 'False Pos', 'False Neg', 'True Pos']
     counts = [value for value in cm.flatten()]
     percentages = ['{0:.2%}'.format(value) for value in cm.flatten()/np.sum(cm)]
-    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(names,counts,percentages)]
-    labels = np.asarray(labels).reshape(2,2)
-    sns.heatmap(cm,annot = labels,cmap = 'Purples',fmt ='')
+    labels = [f'{v1}<br>{v2}<br>{v3}' for v1, v2, v3 in zip(names, counts, percentages)]
+    labels = np.asarray(labels).reshape(2, 2)
+    fig = go.Figure(data=go.Heatmap(
+        z=cm,
+        x=['Predicted Negative', 'Predicted Positive'],
+        y=['Actual Negative', 'Actual Positive'],
+        hoverinfo='text',
+        text=labels,
+        colorscale='Purples'))
+    fig.update_layout(
+        title='Confusion Matrix',
+        xaxis_title='Predicted Label',
+        yaxis_title='True Label')
+    st.plotly_chart(fig)
 
 st.title("🪐 NASA ML Application 🪐")
 
