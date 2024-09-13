@@ -3,7 +3,7 @@ pandas
 numpy
 matplotlib
 seaborn
-scikit-learnx
+scikit-learn
 plotly
 scipy
 imblearn
