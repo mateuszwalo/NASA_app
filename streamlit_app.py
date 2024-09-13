@@ -124,7 +124,7 @@ with st.expander("⚙️ Model training ⚙️"):
         Accuracy_lr=accuracy_score(y_pred_lr,y_test)
         F1_lr=f1_score(y_pred_lr,y_test)
         Kappa_lr=cohen_kappa_score(y_pred_lr,y_test)
-        st.suheader("Logistic Regression evaluation")
+        st.subheader("Logistic Regression evaluation")
         st.write(f"**Accuracy in Logisic Regression = **{Accuracy_lr}")
         st.write(f"**F1 in Logisic Regression** = {F1_lr}")
         st.write(f"**Kappa in Logisic Regression =** {Kappa_lr}")
