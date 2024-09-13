@@ -9,6 +9,18 @@ from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
 
+#Przydatne funkcje do ewaluacji modelu
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score
+
+def model_evaluation(classifier,x_test,y_test):
+    cm = confusion_matrix(y_test,classifier.predict(x_test))
+    names = ['True Neg','False Pos','False Neg','True Pos']
+    counts = [value for value in cm.flatten()]
+    percentages = ['{0:.2%}'.format(value) for value in cm.flatten()/np.sum(cm)]
+    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(names,counts,percentages)]
+    labels = np.asarray(labels).reshape(2,2)
+    sns.heatmap(cm,annot = labels,cmap = 'Purples',fmt ='')
+
 st.title("🪐 NASA ML Application 🪐")
 
 st.info(
@@ -88,18 +100,36 @@ with st.expander("🎯 Statistics 🎯"):
 with st.expander("⚙️ Model training ⚙️"):
     st.info("In this section, you can train your custom model to predict NEOs (Near-Earth Objects).")
     st.info("Due to the imbalanced target, SMOTE was used to upsample the minority class, and the data has been standardized for better model performance.")
-    #t_size=st.slider("Test size (recomended = 0.2)", min_value=0.1, max_value=0.9, value=0.2)
+    
     X_train, X_test, y_train, y_test= train_test_split(X,y,test_size=0.2, stratify=y)
-    smote=SMOTE(k_neighbors=5, random_state=10)
+    smote=SMOTE(k_neighbors=3, random_state=10)
     X_train, y_train=smote.fit_resample(X_train,y_train)
     transformer = StandardScaler()
     transformer2=transformer.fit(X_train)
     X_train = transformer2.transform(X_train)
     X_test = transformer2.transform(X_test)
-    st.write(f"Train X size = {X_train.shape}")
-    st.write(f"Train y size = {y_train.shape}")
-    st.write(f"Test X size = {X_test.shape}")
-    st.write(f"Train y size = {y_test.shape}")
+    models=["Decision Tree","Random Forest","XGB Classifer","Logistic Regression"]
+    
+    selected_model=st.selectbox("Choose model ",models)
+    
+    if selected_model == "Logistic Regression":
+        from sklearn.linear_model import LogisticRegression
+        lr=LogisticRegression()
+        lr.fit(X_train,y_train)
+
+        y_pred_lr=lr.predict(X_test)
+        Accuracy_lr=accuracy_score(y_pred_lr,y_test)
+        F1_lr=f1_score(y_pred_lr,y_test)
+        Kappa_lr=cohen_kappa_score(y_pred_lr,y_test)
+
+        st.write(f"Accuracy in Logisic Regression = {Accuracy_lr}")
+        st.write(f"F1 in Logisic Regression = {F1_lr}")
+        st.write(f"Kappa in Logisic Regression = {Kappa_lr}")
+
+        st.write(classification_report(y_test,y_pred_lr))
+        model_evaluation(lr,X_test,y_test)
+        
+        
     
     
     
