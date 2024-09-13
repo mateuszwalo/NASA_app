@@ -44,7 +44,16 @@ def plot_roc_curve(y_test, y_pred_proba):
     plt.title('Receiver Operating Characteristic')
     plt.legend(loc="lower right")
     st.pyplot(plt)
-
+    
+st.sidebar.header("About")
+st.sidebar.info(
+    """
+    **Author:** Mateusz Walo 
+    **Contact:** mateusz.walo.datascience@gmail.com
+    **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/mateuszwalo/)  
+    **Description:** This application is designed to train and evaluate various machine learning models for predicting Near-Earth Objects (NEOs).
+    """
+)
 st.title("🪐 NASA ML Application 🪐")
 
 st.info(
