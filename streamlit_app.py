@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
 from scipy import stats
+from sklearn.model_selection import train_test_split
 
 st.title("🪐 NASA ML Application 🪐")
 
@@ -82,3 +83,14 @@ with st.expander("🎯 Statistics 🎯"):
         column = st.selectbox("Choose column for Descriptive Statistics", df.columns)
         if column:
             st.write(df[column].describe())
+with st.expander("⚙️ Model training ⚙️"):
+    st.info("In this part you can train your custom model to predict NEO`s ")
+    t_size=st.slider("Test size (recomended = 0.2)", min_value=0.1, max_value=0.9, value=0.2)
+    X_train, X_test, y_train, y_test= train_test_split(X,y,test_size=t_size, stratify=y)
+    st.write(f"Train X size = {X_train.shape}")
+    st.write(f"Train y size = {y_train.shape}")
+    st.write(f"Test X size = {X_test.shape}")
+    st.write(f"Train y size = {y_test.shape}")
+    
+    
+
