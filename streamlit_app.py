@@ -47,6 +47,7 @@ with st.sidebar:
         """
         **Author:** *Mateusz Walo*  
         **LinkedIn:** [My LinkedIn profile :)](https://www.linkedin.com/in/mateuszwalo/)  
+        **Data: ** [Nearest Earth Objects (1910-2024)](https://www.kaggle.com/datasets/ivansher/nasa-nearest-earth-objects-1910-2024)
         """
     )
 st.title("🪐 NASA ML Application 🪐")
@@ -68,7 +69,13 @@ with st.expander("🔍 View NASA's Data 🔍"):
     st.dataframe(df)
 
 with st.expander("📡 Features Descriptions 📡"):
-    st.write("**...**")
+    st.write("**absolute_magnitude** - describes intrinsic luminosity")
+    st.write("**estimated_diameter_min** -minimum Estimated Diameter in Kilometres")
+    st.write("**estimated_diameter_max** - maximum Estimated Diameter in Kilometres")
+    st.write("**relative_velocity** - velocity Relative to Earth in Kmph")
+    st.write("**miss_distance** - distance in Kilometres missed")
+    st.write("**is_hazardous** - Boolean feature that shows whether asteroid is harmful or no")
+    
  
 with st.expander("📈 Data Visualization 📈"):
     plots_type = ["Histogram", "Box Plot", "Scatter Plot"] 
