@@ -1,22 +1,31 @@
-# 🪐 NASA Machine Learning app 
+# 🪐 NASA Machine Learning App
 
-This application will allow you to do EDA and predict the threat to Earth thanks to machine learning models
+Welcome to the NASA Machine Learning App! This application enables you to perform Exploratory Data Analysis (EDA) and predict potential threats to Earth using various machine learning models. Built with Streamlit, it provides an interactive and user-friendly interface to explore and analyze data related to Near-Earth Objects (NEOs).
 
-## Demo App
+## Demo
+
+Experience the app in action:
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://nasaapp-ashydrsbkhkgkqbujzdng8.streamlit.app/)
 
 ## GitHub Codespaces
 
+You can also explore and modify the app using GitHub Codespaces:
+
 [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/app-starter-kit?quickstart=1)
 
-## Section Heading
+## Features
 
-This is filler text, please replace this with text for this section.
+- **Exploratory Data Analysis (EDA)**: Visualize and analyze data to gain insights into NEOs.
+- **Model Training**: Train and evaluate various machine learning models, including Logistic Regression, Decision Trees, Random Forests, and XGBoost.
+- **Data Preprocessing**: Handle imbalanced data using SMOTE and standardize features for better model performance.
+- **Evaluation Metrics**: Get detailed evaluation metrics and visualize model performance with ROC curves and AUC scores.
 
-## Further Reading
+## Installation
 
-This is filler text, please replace this with a explanatory text about further relevant resources for this repo
-- Resource 1
-- Resource 2
-- Resource 3
+To get started with this app locally, follow these steps:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/your-username/nasa-machine-learning-app.git
