@@ -119,9 +119,9 @@ with st.expander("⚙️ Model training ⚙️"):
     if selected_model == "Logistic Regression":
         st.subheader("Logistic Regression - Model Configuration")
         c_value = st.slider("C (Inverse of regularization strength)", min_value=0.01, max_value=10.0, value=1.0, step=0.01)
-        max_iter = st.slider("Maximum Iterations", min_value=50, max_value=500, value=100, step=10)
-        solver = st.selectbox("Solver", ["lbfgs", "liblinear", "sag", "saga"])
-        lr = LogisticRegression(C=c_value, max_iter=max_iter, solver=solver)
+        max_iter_ = st.slider("Maximum Iterations", min_value=50, max_value=500, value=100, step=10)
+        solver_ = st.selectbox("Solver", ["lbfgs", "liblinear", "sag", "saga"])
+        lr = LogisticRegression(C=c_value, max_iter=max_iter_, solver=solver_)
         lr.fit(X_train, y_train)
         y_pred_lr = lr.predict(X_test)
         Accuracy_lr = accuracy_score(y_test, y_pred_lr)
