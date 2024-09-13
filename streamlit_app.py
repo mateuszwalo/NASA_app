@@ -45,7 +45,8 @@ def plot_roc_curve(y_test, y_pred_proba):
     plt.legend(loc="lower right")
     st.pyplot(plt)
     
-with st.sidebar.header("About app"):
+with st.sidebar:
+    st.header("About")
     st.sidebar.info(
         """
         **Author:** *Mateusz Walo*  
