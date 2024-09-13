@@ -4,7 +4,7 @@ This application will allow you to do EDA and predict the threat to Earth thanks
 
 ## Demo App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://NASA_app.streamlit.app/)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://nasaapp-ashydrsbkhkgkqbujzdng8.streamlit.app/)
 
 ## GitHub Codespaces
 
