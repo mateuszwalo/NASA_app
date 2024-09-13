@@ -121,7 +121,7 @@ with st.expander("⚙️ Model training ⚙️"):
         c_value = st.slider("C (Inverse of regularization strength)", min_value=0.01, max_value=10.0, value=1.0, step=0.01)
         max_iter = st.slider("Maximum Iterations", min_value=50, max_value=500, value=100, step=10)
         solver = st.selectbox("Solver", ["lbfgs", "liblinear", "sag", "saga"])
-        lr = LogisticRegression(C=c_value, max_iter=max_iter, solver=solver, random_state=10)
+        lr = LogisticRegression(C=c_value, max_iter=max_iter, solver=solver)
         lr.fit(X_train, y_train)
         y_pred_lr = lr.predict(X_test)
         Accuracy_lr = accuracy_score(y_test, y_pred_lr)
