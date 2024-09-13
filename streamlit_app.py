@@ -10,10 +10,6 @@ from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score, auc
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from xgboost import XGBClassifier
 
 def model_evaluation(classifier, x_test, y_test):
     from sklearn.linear_model import LogisticRegression
@@ -150,6 +146,7 @@ with st.expander("⚙️ Model training ⚙️"):
     selected_model = st.selectbox("Choose model", models)
     
     if selected_model == "Decision Tree":
+        from sklearn.tree import DecisionTreeClassifier
         st.subheader("Decision Tree - Model Configuration")
         max_depth = st.slider("Max Depth", min_value=1, max_value=20, value=3, step=1)
         min_samples_split = st.slider("Min Samples Split", min_value=2, max_value=20, value=2, step=1)
@@ -174,6 +171,7 @@ with st.expander("⚙️ Model training ⚙️"):
         plot_roc_curve(y_test, y_pred_proba_dt)
     
     elif selected_model == "Random Forest":
+        from sklearn.ensemble import RandomForestClassifier
         st.subheader("Random Forest - Model Configuration")
         n_estimators = st.slider("Number of Estimators", min_value=10, max_value=300, value=100, step=10)
         max_depth = st.slider("Max Depth", min_value=1, max_value=20, value=3, step=1)
@@ -198,6 +196,7 @@ with st.expander("⚙️ Model training ⚙️"):
         plot_roc_curve(y_test, y_pred_proba_rf)
     
     elif selected_model == "XGB Classifier":
+        from xgboost import XGBClassifier
         st.subheader("XGB Classifier - Model Configuration")
         n_estimators = st.slider("Number of Estimators", min_value=10, max_value=300, value=100, step=10)
         max_depth = st.slider("Max Depth", min_value=1, max_value=20, value=3, step=1)
@@ -222,6 +221,7 @@ with st.expander("⚙️ Model training ⚙️"):
         plot_roc_curve(y_test, y_pred_proba_xgb)
     
     elif selected_model == "Logistic Regression":
+        from sklearn.linear_model import LogisticRegression
         st.subheader("Logistic Regression - Model Configuration")
         c_value = st.slider("C (Inverse of regularization strength)", min_value=0.01, max_value=10.0, value=1.0, step=0.01)
         max_iter_ = st.slider("Maximum Iterations", min_value=50, max_value=500, value=100, step=10)
