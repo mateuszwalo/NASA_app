@@ -84,13 +84,15 @@ with st.expander("🎯 Statistics 🎯"):
         if column:
             st.write(df[column].describe())
 with st.expander("⚙️ Model training ⚙️"):
-    st.info("In this part you can train your custom model to predict NEO`s ")
-    t_size=st.slider("Test size (recomended = 0.2)", min_value=0.1, max_value=0.9, value=0.2)
-    X_train, X_test, y_train, y_test= train_test_split(X,y,test_size=t_size, stratify=y)
+    st.info("In this section, you can train your custom model to predict NEOs (Near-Earth Objects).")
+    st.info("Due to the imbalanced target, SMOTE was used to upsample the minority class, and the data has been standardized for better model performance.")
+    #t_size=st.slider("Test size (recomended = 0.2)", min_value=0.1, max_value=0.9, value=0.2)
+    X_train, X_test, y_train, y_test= train_test_split(X,y,test_size=0.2, stratify=y)
     st.write(f"Train X size = {X_train.shape}")
     st.write(f"Train y size = {y_train.shape}")
     st.write(f"Test X size = {X_test.shape}")
     st.write(f"Train y size = {y_test.shape}")
+    
     
     
 
