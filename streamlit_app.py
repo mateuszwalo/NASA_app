@@ -48,9 +48,9 @@ def plot_roc_curve(y_test, y_pred_proba):
 st.sidebar.header("About")
 st.sidebar.info(
     """
-    **Author:** Mateusz Walo 
-    **Contact:** mateusz.walo.datascience@gmail.com
-    **LinkedIn:** [Your LinkedIn Profile](https://www.linkedin.com/in/mateuszwalo/)  
+    **Author:** *Mateusz Walo*// 
+    **Contact:** mateusz.walo.datascience@gmail.com//
+    **LinkedIn:** [My LinkedIn profile :)](https://www.linkedin.com/in/mateuszwalo/)//
     **Description:** This application is designed to train and evaluate various machine learning models for predicting Near-Earth Objects (NEOs).
     """
 )
