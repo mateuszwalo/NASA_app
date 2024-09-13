@@ -16,20 +16,14 @@ def model_evaluation(classifier, x_test, y_test):
     names = ['True Neg', 'False Pos', 'False Neg', 'True Pos']
     counts = [value for value in cm.flatten()]
     percentages = ['{0:.2%}'.format(value) for value in cm.flatten()/np.sum(cm)]
-    labels = [f'{v1}<br>{v2}<br>{v3}' for v1, v2, v3 in zip(names, counts, percentages)]
+    labels = [f'{v1}\n{v2}\n{v3}' for v1, v2, v3 in zip(names, counts, percentages)]
     labels = np.asarray(labels).reshape(2, 2)
-    fig = go.Figure(data=go.Heatmap(
-        z=cm,
-        x=['Predicted Negative', 'Predicted Positive'],
-        y=['Actual Negative', 'Actual Positive'],
-        hoverinfo='text',
-        text=labels,
-        colorscale='Purples'))
-    fig.update_layout(
-        title='Confusion Matrix',
-        xaxis_title='Predicted Label',
-        yaxis_title='True Label')
-    st.plotly_chart(fig)
+    plt.figure(figsize=(8, 6))
+    sns.heatmap(cm, annot=labels, fmt='', cmap='Purples', cbar=False, annot_kws={"size": 14})
+    plt.title('Confusion Matrix')
+    plt.xlabel('Predicted Label')
+    plt.ylabel('True Label')
+    st.pyplot(plt)
 
 st.title("🪐 NASA ML Application 🪐")
 
@@ -126,17 +120,15 @@ with st.expander("⚙️ Model training ⚙️"):
         from sklearn.linear_model import LogisticRegression
         lr=LogisticRegression()
         lr.fit(X_train,y_train)
-
         y_pred_lr=lr.predict(X_test)
         Accuracy_lr=accuracy_score(y_pred_lr,y_test)
         F1_lr=f1_score(y_pred_lr,y_test)
         Kappa_lr=cohen_kappa_score(y_pred_lr,y_test)
-
-        st.write(f"Accuracy in Logisic Regression = {Accuracy_lr}")
-        st.write(f"F1 in Logisic Regression = {F1_lr}")
-        st.write(f"Kappa in Logisic Regression = {Kappa_lr}")
-
-        st.write(classification_report(y_test,y_pred_lr))
+        st.suheader("Logistic Regression evaluation")
+        st.write(f"**Accuracy in Logisic Regression = **{Accuracy_lr}")
+        st.write(f"**F1 in Logisic Regression** = {F1_lr}")
+        st.write(f"**Kappa in Logisic Regression =** {Kappa_lr}")
+        #st.write(classification_report(y_test,y_pred_lr))
         model_evaluation(lr,X_test,y_test)
         
         
