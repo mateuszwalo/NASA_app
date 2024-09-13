@@ -6,6 +6,8 @@ import seaborn as sns
 import plotly.express as px
 from scipy import stats
 from sklearn.model_selection import train_test_split
+from imblearn.over_sampling import SMOTE
+from sklearn.preprocessing import StandardScaler
 
 st.title("🪐 NASA ML Application 🪐")
 
@@ -88,6 +90,12 @@ with st.expander("⚙️ Model training ⚙️"):
     st.info("Due to the imbalanced target, SMOTE was used to upsample the minority class, and the data has been standardized for better model performance.")
     #t_size=st.slider("Test size (recomended = 0.2)", min_value=0.1, max_value=0.9, value=0.2)
     X_train, X_test, y_train, y_test= train_test_split(X,y,test_size=0.2, stratify=y)
+    smote=SMOTE(k_neighbors=5, random_state=10)
+    X_train, y_train=smote.fit_resample(X_train,y_train)
+    transformer = StandardScaler()
+    transformer2=transformer.fit(X_train)
+    X_train = transformer2.transform(X_train)
+    X_test = transformer2.transform(X_test)
     st.write(f"Train X size = {X_train.shape}")
     st.write(f"Train y size = {y_train.shape}")
     st.write(f"Test X size = {X_test.shape}")
