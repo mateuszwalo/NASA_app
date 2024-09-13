@@ -12,6 +12,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score
 
 def model_evaluation(classifier, x_test, y_test):
+    from sklearn.linear_model import LogisticRegression
     cm = confusion_matrix(y_test, classifier.predict(x_test))
     names = ['True Neg', 'False Pos', 'False Neg', 'True Pos']
     counts = [value for value in cm.flatten()]
