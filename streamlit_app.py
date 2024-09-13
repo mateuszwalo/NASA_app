@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score
+from sklearn.linear_model import LogisticRegression
 
 def model_evaluation(classifier, x_test, y_test):
     from sklearn.linear_model import LogisticRegression
@@ -102,49 +103,73 @@ with st.expander("🎯 Statistics 🎯"):
         column = st.selectbox("Choose column for Descriptive Statistics", df.columns)
         if column:
             st.write(df[column].describe())
+            
 with st.expander("⚙️ Model training ⚙️"):
-    st.info("In this section, you can train your custom model with to predict NEOs (Near-Earth Objects).\\Due to the imbalanced target, SMOTE was used to upsample the minority class, and the data has been standardized for better model performance.")
+    st.info(
+        "In this section, you can train your custom model to predict NEOs (Near-Earth Objects). "
+        "Due to the imbalanced target, SMOTE was used to upsample the minority class, and the data has been standardized for better model performance."
+    )
     
-    X_train, X_test, y_train, y_test= train_test_split(X,y,test_size=0.2, stratify=y)
-    smote=SMOTE(k_neighbors=3, random_state=10)
-    X_train, y_train=smote.fit_resample(X_train,y_train)
-    transformer = StandardScaler()
-    transformer2=transformer.fit(X_train)
-    X_train = transformer2.transform(X_train)
-    X_test = transformer2.transform(X_test)
-    models=["Decision Tree","Random Forest","XGB Classifer","Logistic Regression"]
+    # Podział danych na zestawy treningowy i testowy
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratify=y, random_state=42)
     
-    selected_model=st.selectbox("Choose model ",models)
+    # Użycie SMOTE do zrównoważenia klas
+    smote = SMOTE(k_neighbors=3, random_state=10)
+    X_train, y_train = smote.fit_resample(X_train, y_train)
+    
+    # Standaryzacja danych
+    scaler = StandardScaler()
+    X_train = scaler.fit_transform(X_train)
+    X_test = scaler.transform(X_test)
+    
+    # Wybór modelu
+    models = ["Decision Tree", "Random Forest", "XGB Classifier", "Logistic Regression"]
+    selected_model = st.selectbox("Choose model", models)
     
     if selected_model == "Logistic Regression":
         st.subheader("Logistic Regression - Model Configuration")
+        
+        # Konfiguracja parametrów modelu przez użytkownika
         c_value = st.slider("C (Inverse of regularization strength)", min_value=0.01, max_value=10.0, value=1.0, step=0.01)
         max_iter_ = st.slider("Maximum Iterations", min_value=50, max_value=500, value=100, step=10)
         solver_ = st.selectbox("Solver", ["lbfgs", "liblinear", "sag", "saga"])
-        lr = LogisticRegression(C=c_value, max_iter=max_iter_, solver=solver_)
-        lr.fit(X_train, y_train)
-        y_pred_lr = lr.predict(X_test)
-        Accuracy_lr = accuracy_score(y_test, y_pred_lr)
-        F1_lr = f1_score(y_test, y_pred_lr)
-        Kappa_lr = cohen_kappa_score(y_test, y_pred_lr)
-    
-        st.subheader("Logistic Regression - Evaluation Metrics")
-        st.write(f"**Accuracy in Logistic Regression =** {Accuracy_lr}")
-        st.write(f"**F1 in Logistic Regression =** {F1_lr}")
-        st.write(f"**Kappa in Logistic Regression =** {Kappa_lr}")
-        model_evaluation(lr, X_test, y_test)
-        st.subheader("ROC Curve and AUC")
-        y_pred_proba_lr = lr.predict_proba(X_test)[:, 1]
-        fpr, tpr, thresholds = roc_curve(y_test, y_pred_proba_lr)
-        roc_auc = auc(fpr, tpr)
-        plt.figure(figsize=(8, 6))
-        plt.plot(fpr, tpr, color='purple', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
-        plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--')
-        plt.xlim([0.0, 1.0])
-        plt.ylim([0.0, 1.05])
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.title('Receiver Operating Characteristic')
-        plt.legend(loc="lower right")
-        st.pyplot(plt)
+        
+        try:
+            # Trenowanie modelu
+            lr = LogisticRegression(C=c_value, max_iter=max_iter_, solver=solver_, random_state=42)
+            lr.fit(X_train, y_train)
+            y_pred_lr = lr.predict(X_test)
+            
+            # Obliczenie metryk
+            Accuracy_lr = accuracy_score(y_test, y_pred_lr)
+            F1_lr = f1_score(y_test, y_pred_lr)
+            Kappa_lr = cohen_kappa_score(y_test, y_pred_lr)
+            
+            st.subheader("Logistic Regression - Evaluation Metrics")
+            st.write(f"**Accuracy in Logistic Regression =** {Accuracy_lr}")
+            st.write(f"**F1 in Logistic Regression =** {F1_lr}")
+            st.write(f"**Kappa in Logistic Regression =** {Kappa_lr}")
+            
+            # Wizualizacja macierzy pomyłek
+            model_evaluation(lr, X_test, y_test)
+            
+            # Krzywa ROC i AUC
+            st.subheader("ROC Curve and AUC")
+            y_pred_proba_lr = lr.predict_proba(X_test)[:, 1]
+            fpr, tpr, _ = roc_curve(y_test, y_pred_proba_lr)
+            roc_auc = auc(fpr, tpr)
+            
+            plt.figure(figsize=(8, 6))
+            plt.plot(fpr, tpr, color='purple', lw=2, label=f'ROC curve (area = {roc_auc:.2f})')
+            plt.plot([0, 1], [0, 1], color='gray', lw=2, linestyle='--')
+            plt.xlim([0.0, 1.0])
+            plt.ylim([0.0, 1.05])
+            plt.xlabel('False Positive Rate')
+            plt.ylabel('True Positive Rate')
+            plt.title('Receiver Operating Characteristic')
+            plt.legend(loc="lower right")
+            st.pyplot(plt)
+        
+        except Exception as e:
+            st.error(f"An error occurred: {str(e)}")
 
