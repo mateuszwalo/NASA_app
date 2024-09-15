@@ -55,15 +55,35 @@ def plot_roc_curve(y_test, y_pred_proba):
     st.pyplot(plt)
 
 
-page_bg_img = """
+css = """
 <style>
-[data-testid="stVerticalBlock"] {
-    background-color: purple; /* Czarny kolor tła */
-    color: white; /* Białe napisy */
+body {
+    background-color: black;
+    color: white;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: white;
+}
+.stButton>button {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+}
+.stTextInput>div>input {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+}
+.stSelectbox>div>select {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
 }
 </style>
 """
-st.markdown(page_bg_img, unsafe_allow_html=True)
+
+# Apply the CSS
+st.markdown(css, unsafe_allow_html=True)
 
 st.title("🪐 NASA ML Application 🪐")
 st.info(
