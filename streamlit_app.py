@@ -276,7 +276,7 @@ with st.expander("🎰 Predict your own NEO`s 🎰"):
     miss_distance=st.slider("Miss distance",min_value=6000, max_value=75000000, value=10000, step=500)
     if st.button("**Predict**"):
         result=predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance)
-        st.succes('The output is {}'.format(result))
+    st.succes('The output is {}'.format(result))
     
     
     
