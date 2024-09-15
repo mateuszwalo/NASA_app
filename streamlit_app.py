@@ -63,6 +63,34 @@ with st.sidebar:
         **Data:** [Nearest Earth Objects (1910-2024)](https://www.kaggle.com/datasets/ivansher/nasa-nearest-earth-objects-1910-2024)
         """
     )
+
+css = """
+<style>
+body {
+    background-color: black;
+    color: white;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: white;
+}
+.stButton>button {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+}
+.stTextInput>div>input {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+}
+.stSelectbox>div>select {
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+}
+</style>
+"""
+st.markdown(css, unsafe_allow_html=True)
     
 st.title("🪐 NASA ML Application 🪐")
 st.info(
