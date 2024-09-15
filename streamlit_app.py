@@ -69,6 +69,7 @@ html_temp = """
     /* Jednolite czarne tło */
     body {
         background-color: #000000 !important;
+        color: #FFFFFF !important; /* Ustawienie domyślnego koloru tekstu na biały */
     }
 
     /* Stylizacja tytułów i nagłówków - białe czcionki */
@@ -96,9 +97,17 @@ html_temp = """
     .stSlider, .stButton {
         text-align: center;
     }
+    
+    /* Nagłówek z czarnym tłem */
+    .app-header {
+        background-color: #000000;
+        color: #FFFFFF;
+        padding: 10px;
+        border-radius: 8px;
+    }
     </style>
-    <div style="background-color:#FFD700; padding:10px; border-radius: 8px;">
-        <h1 style="color:black; text-align:center;">🪐 NASA ML Application 🪐</h1>
+    <div class="app-header">
+        <h1>🪐 NASA ML Application 🪐</h1>
     </div>
 """
 st.markdown(html_temp, unsafe_allow_html=True)
