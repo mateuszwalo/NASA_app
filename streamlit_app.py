@@ -57,7 +57,7 @@ def plot_roc_curve(y_test, y_pred_proba):
 
 css = """
 <style>
-[data-testid="stVerticalBlock"]{
+[data-testid="stApp"]{
 background-color: rgba(182, 33, 248, 1);background-image: radial-gradient(circle, rgba(250, 89, 252, 1) 0%, rgba(41, 53, 86, 1) 100%),  url(https://img.icons8.com/android/2x/happy.png);background-size: auto;background-position: left top;background-repeat: repeat;
 
 }
