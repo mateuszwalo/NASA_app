@@ -15,10 +15,13 @@ import pickle
 pickle_in_1=open("tree.pkl","rb")
 best_tree=pickle.load(pickle_in_1)
 
-def predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance):
-    prediction=best_tree.predict([[absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance]])
-    print(f"Prediction = {prediction}")
-    return prediction
+def predict_own_neo(absolute_magnitude, estimated_diameter_min, estimated_diameter_max, relative_velocity, miss_distance):
+    try:
+        prediction = best_tree.predict([[absolute_magnitude, estimated_diameter_min, estimated_diameter_max, relative_velocity, miss_distance]])
+        return prediction[0]
+    except Exception as e:
+        st.error(f"Prediction error: {e}")
+        return None
     
 
 def model_evaluation(classifier, x_test, y_test):
