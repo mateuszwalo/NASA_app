@@ -10,10 +10,9 @@ from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score, auc
+import pickle
 
 def predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance):
-    from sklearn.tree import DecisionTreeClassifier
-    best_tree=DecisionTreeClassifier(max_depth=20, min_samples_split=2, min_samples_leaf=2, random_state=42)
     prediction=best_tree.predict([[absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance]])
     print(f"Prediction = {prediction}")
     return prediction
