@@ -12,6 +12,53 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score, auc
 import pickle
 
+def add_custom_css():
+    st.markdown("""
+        <style>
+        /* Tło aplikacji */
+        body {
+            background-image: url('https://images.unsplash.com/photo-1447433819943-74a20887a3b2');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* Stylizacja tytułów i nagłówków */
+        h1, h2, h3 {
+            color: #FFFFFF;
+            text-align: center;
+            font-family: 'Helvetica', sans-serif;
+        }
+
+        /* Stylizacja tekstu */
+        .stTextInput, .stSlider {
+            color: #FFFFFF;
+        }
+
+        /* Stylizacja suwaków i przycisków */
+        .stButton button {
+            background-color: #0066FF;
+            color: white;
+            font-size: 20px;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        /* Stylizacja suwaków */
+        .stSlider .stSliderTrack {
+            background-color: #0044CC;
+        }
+
+        /* Wyśrodkowanie elementów */
+        .stSlider, .stButton {
+            text-align: center;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+
+add_custom_css()
+
+
 pickle_in_1=open("tree.pkl","rb")
 best_tree=pickle.load(pickle_in_1)
 
