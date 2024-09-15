@@ -54,21 +54,10 @@ def plot_roc_curve(y_test, y_pred_proba):
     plt.legend(loc="lower right")
     st.pyplot(plt)
     
-with st.sidebar:
-    st.header("About")
-    st.sidebar.info(
-        """
-        **Author:** *Mateusz Walo*  
-        **LinkedIn:** [My LinkedIn profile :)](https://www.linkedin.com/in/mateuszwalo/)  
-        **Data:** [Nearest Earth Objects (1910-2024)](https://www.kaggle.com/datasets/ivansher/nasa-nearest-earth-objects-1910-2024)
-        """
-    )
-
 css = """
 <style>
 body {
-    background-color: black;
-    color: white;
+    background-color: purple;
 }
 </style>
 """
@@ -82,7 +71,15 @@ st.info(
     Explore their history, from the first recorded sighting in 1910 to today.
     """
 )
-
+with st.sidebar:
+    st.header("About")
+    st.sidebar.info(
+        """
+        **Author:** *Mateusz Walo*  
+        **LinkedIn:** [My LinkedIn profile :)](https://www.linkedin.com/in/mateuszwalo/)  
+        **Data:** [Nearest Earth Objects (1910-2024)](https://www.kaggle.com/datasets/ivansher/nasa-nearest-earth-objects-1910-2024)
+        """
+    )
 df = pd.read_csv("https://raw.githubusercontent.com/mateuszwalo/NASA_app/master/Nasa_clean_v2.csv")
 X=df.drop("is_hazardous",axis=1)
 y=df["is_hazardous"]
