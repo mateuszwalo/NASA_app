@@ -12,36 +12,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score, auc
 import pickle
 
-def add_custom_css():
-    st.markdown("""
-        <style>
-        /* Jednolite czarne tło */
-        body {
-            background-color: #000000 !important;
-            color: #FFFFFF !important; /* Ustawienie domyślnego koloru tekstu na biały */
-        }
-
-        /* Stylizacja tytułów i nagłówków - białe czcionki */
-        h1, h2, h3 {
-            color: #FFFFFF !important;
-            text-align: center;
-            font-family: 'Helvetica', sans-serif;
-        }
-
-        /* Stylizacja tekstu */
-        .stTextInput, .stSlider {
-            color: #FFFFFF !important;
-        }
-
-        /* Wyśrodkowanie elementów */
-        .stSlider, .stButton {
-            text-align: center;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-add_custom_css()
-
-
 pickle_in_1=open("tree.pkl","rb")
 best_tree=pickle.load(pickle_in_1)
 
