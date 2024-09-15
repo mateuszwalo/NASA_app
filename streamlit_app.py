@@ -55,14 +55,6 @@ def plot_roc_curve(y_test, y_pred_proba):
     st.pyplot(plt)
 
 
-css = """
-<style>
-[data-testid="stApp"]{
-background-color: rgb(251, 207, 40);background-image: radial-gradient(circle, rgba(213, 89, 252, 1) 100%, rgba(41, 53, 86, 1) 0%),  url(https://img.icons8.com/android/2x/happy.png);background-size: auto;background-position: left top;background-repeat: repeat;
-</style>
-"""
-
-st.markdown(css, unsafe_allow_html=True)
 
 st.title("🪐 NASA ML Application 🪐")
 st.info(
