@@ -57,6 +57,7 @@ def plot_roc_curve(y_test, y_pred_proba):
 
 css = """
 <style>
+[data-testid="stVerticalBlock"]
 body {
     background-color: black;
     color: white;
