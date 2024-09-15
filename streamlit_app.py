@@ -68,7 +68,7 @@ with st.expander("🔍 View NASA's Data 🔍"):
     st.write("**Explore NASA's extensive database, documenting every recorded N.E.O. from 1910 to 2024.**")
     st.dataframe(df)
 
-with st.expander("📡 Features Descriptions 📡"):
+with st.expander("📡 Columns Descriptions 📡"):
     st.info("**absolute_magnitude** - describes intrinsic luminosity")
     st.info("**estimated_diameter_min** -minimum Estimated Diameter in Kilometres")
     st.info("**estimated_diameter_max** - maximum Estimated Diameter in Kilometres")
@@ -93,7 +93,7 @@ with st.expander("📈 Data Visualization 📈"):
             fig.update_traces(marker_color='purple')
             st.plotly_chart(fig)
     elif selected_plot_type == "Box Plot":
-        selected_column = st.selectbox("Choose column for Box Plot", df.columns)
+        selected_column = st.selectbox("Choose column for Box Plot", X.columns)
         if selected_column:
             fig = px.box(
                 df, 
@@ -104,8 +104,8 @@ with st.expander("📈 Data Visualization 📈"):
             st.plotly_chart(fig)
     
     elif selected_plot_type == "Scatter Plot":
-        x_column = st.selectbox("Choose x-axis column for Scatter Plot", df.columns)
-        y_column = st.selectbox("Choose y-axis column for Scatter Plot", df.columns)
+        x_column = st.selectbox("Choose x-axis column for Scatter Plot", X.columns)
+        y_column = st.selectbox("Choose y-axis column for Scatter Plot", X.columns)
         
         if x_column and y_column:
             fig = px.scatter(
@@ -255,6 +255,11 @@ with st.expander("⚙️ Model training ⚙️"):
         
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
+
+with st.expander("🎰 Predict your own NEO`s 🎰"):
+    st.info("In this section you can check your own NEOS`s if they are a threat to the earth")
+    st.inf("*Prediction with the best decision tree estimator*")
+    
             
 
 
