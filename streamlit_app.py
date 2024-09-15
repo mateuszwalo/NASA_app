@@ -17,34 +17,20 @@ def add_custom_css():
         <style>
         /* Jednolite czarne tło */
         body {
-            background-color: #000000;
-            color: #FFFFFF; /* Ustawienie domyślnego koloru tekstu na biały */
+            background-color: #000000 !important;
+            color: #FFFFFF !important; /* Ustawienie domyślnego koloru tekstu na biały */
         }
 
         /* Stylizacja tytułów i nagłówków - białe czcionki */
         h1, h2, h3 {
-            color: #FFFFFF;
+            color: #FFFFFF !important;
             text-align: center;
             font-family: 'Helvetica', sans-serif;
         }
 
         /* Stylizacja tekstu */
         .stTextInput, .stSlider {
-            color: #FFFFFF;
-        }
-
-        /* Stylizacja przycisków */
-        .stButton button {
-            background-color: #0066FF;
-            color: white;
-            font-size: 20px;
-            padding: 10px 20px;
-            border-radius: 8px;
-        }
-
-        /* Stylizacja suwaków */
-        .stSlider .stSliderTrack {
-            background-color: #0044CC;
+            color: #FFFFFF !important;
         }
 
         /* Wyśrodkowanie elementów */
@@ -53,7 +39,6 @@ def add_custom_css():
         }
         </style>
     """, unsafe_allow_html=True)
-
 add_custom_css()
 
 
