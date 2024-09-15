@@ -285,7 +285,7 @@ with st.expander("🎰 Predict your own NEO`s 🎰"):
             st.image("https://media.giphy.com/media/eVp0a3dxy13P8l4DFA/giphy.gif", use_column_width=True)
         else: 
             st.write("😊 Relax! The Earth is safe!")
-            st.image("https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif", use_column_width=True)
+            st.image("https://media.giphy.com/media/M52z7SjnRKHHG/giphy.gif", use_column_width=True)
 
     
     
