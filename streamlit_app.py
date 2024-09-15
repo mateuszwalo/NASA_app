@@ -13,18 +13,7 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 import pickle
 
 
-page_bg_img="""
-<style>
-[data-testid="stVerticalBlock"]{
-background-color: #000000;
-opacity: 0.9;
-background-image:  linear-gradient(30deg, #f300ff 12%, transparent 12.5%, transparent 87%, #f300ff 87.5%, #f300ff), linear-gradient(150deg, #f300ff 12%, transparent 12.5%, transparent 87%, #f300ff 87.5%, #f300ff), linear-gradient(30deg, #f300ff 12%, transparent 12.5%, transparent 87%, #f300ff 87.5%, #f300ff), linear-gradient(150deg, #f300ff 12%, transparent 12.5%, transparent 87%, #f300ff 87.5%, #f300ff), linear-gradient(60deg, #f300ff77 25%, transparent 25.5%, transparent 75%, #f300ff77 75%, #f300ff77), linear-gradient(60deg, #f300ff77 25%, transparent 25.5%, transparent 75%, #f300ff77 75%, #f300ff77);
-background-size: 60px 105px;
-background-position: 0 0, 0 0, 30px 53px, 30px 53px, 0 0, 30px 53px;
-}
-</style>
-"""
-st.markdown(page_bg_img,unsafe_allow_html=True)
+
 
 
 pickle_in_1=open("tree.pkl","rb")
@@ -70,7 +59,19 @@ def plot_roc_curve(y_test, y_pred_proba):
     st.pyplot(plt)
 
 
-    
+page_bg_img="""
+<style>
+[data-testid="stVerticalBlock"]{
+background-color: #000000;
+opacity: 0.9;
+background-image:  linear-gradient(30deg, #f300ff 12%, transparent 12.5%, transparent 87%, #f300ff 87.5%, #f300ff), linear-gradient(150deg, #f300ff 12%, transparent 12.5%, transparent 87%, #f300ff 87.5%, #f300ff), linear-gradient(30deg, #f300ff 12%, transparent 12.5%, transparent 87%, #f300ff 87.5%, #f300ff), linear-gradient(150deg, #f300ff 12%, transparent 12.5%, transparent 87%, #f300ff 87.5%, #f300ff), linear-gradient(60deg, #f300ff77 25%, transparent 25.5%, transparent 75%, #f300ff77 75%, #f300ff77), linear-gradient(60deg, #f300ff77 25%, transparent 25.5%, transparent 75%, #f300ff77 75%, #f300ff77);
+background-size: 60px 105px;
+background-position: 0 0, 0 0, 30px 53px, 30px 53px, 0 0, 30px 53px;
+}
+</style>
+"""
+st.markdown(page_bg_img,unsafe_allow_html=True)
+
 st.title("🪐 NASA ML Application 🪐")
 st.info(
     """
