@@ -12,6 +12,9 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score, auc
 import pickle
 
+pickle_in_1=open("tree.pkl","rb")
+best_tree=pickle.load(pickle_in_1)
+
 def predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance):
     prediction=best_tree.predict([[absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance]])
     print(f"Prediction = {prediction}")
