@@ -58,8 +58,7 @@ def plot_roc_curve(y_test, y_pred_proba):
 css = """
 <style>
 [data-testid="stApp"]{
-background-color: rgba(182, 33, 248, 1);background-image: radial-gradient(circle, rgba(250, 89, 252, 1) 0%, rgba(41, 53, 86, 1) 100%),  url(https://img.icons8.com/android/2x/happy.png);background-size: auto;background-position: left top;background-repeat: repeat;
-
+background-color: rgb(251, 207, 40);background-image: linear-gradient(179deg, rgba(244, 67, 255, 1) 41%, rgba(68, 0, 64, 1) 100%),  url(https://img.icons8.com/android/2x/happy.png);background-size: auto;background-position: left top;background-repeat: repeat;
 }
 </style>
 """
