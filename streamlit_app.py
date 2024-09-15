@@ -15,11 +15,10 @@ import pickle
 def add_custom_css():
     st.markdown("""
         <style>
-        /* Gradientowe tło */
+        /* Jednolite czarne tło */
         body {
-            background: linear-gradient(135deg, #000000, #434343);
-            background-size: cover;
-            background-attachment: fixed;
+            background-color: #000000;
+            color: #FFFFFF; /* Ustawienie domyślnego koloru tekstu na biały */
         }
 
         /* Stylizacja tytułów i nagłówków - białe czcionki */
