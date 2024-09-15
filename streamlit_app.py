@@ -74,15 +74,7 @@ st.info(
     Explore their history, from the first recorded sighting in 1910 to today.
     """
 )
-with st.sidebar:
-    st.header("About")
-    st.sidebar.info(
-        """
-        **Author:** *Mateusz Walo*  
-        **LinkedIn:** [My LinkedIn profile :)](https://www.linkedin.com/in/mateuszwalo/)  
-        **Data:** [Nearest Earth Objects (1910-2024)](https://www.kaggle.com/datasets/ivansher/nasa-nearest-earth-objects-1910-2024)
-        """
-    )
+
 df = pd.read_csv("https://raw.githubusercontent.com/mateuszwalo/NASA_app/master/Nasa_clean_v2.csv")
 X=df.drop("is_hazardous",axis=1)
 y=df["is_hazardous"]
@@ -296,6 +288,16 @@ with st.expander("🎰 Predict your own NEO`s 🎰"):
         else: 
             st.write("😊 Relax! The Earth is safe!")
             st.image("https://media.giphy.com/media/M52z7SjnRKHHG/giphy.gif", use_column_width=True)
+
+
+with st.expander("About App"):
+    st.info(
+        """
+        **Author:** *Mateusz Walo*  
+        **LinkedIn:** [My LinkedIn profile :)](https://www.linkedin.com/in/mateuszwalo/)  
+        **Data:** [Nearest Earth Objects (1910-2024)](https://www.kaggle.com/datasets/ivansher/nasa-nearest-earth-objects-1910-2024)
+        """
+    )
 
     
     
