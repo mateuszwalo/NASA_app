@@ -15,14 +15,14 @@ import pickle
 def add_custom_css():
     st.markdown("""
         <style>
-        /* Tło aplikacji */
+        /* Gradientowe tło */
         body {
-            background-image: url('https://images.unsplash.com/photo-1447433819943-74a20887a3b2');
+            background: linear-gradient(135deg, #000000, #434343);
             background-size: cover;
             background-attachment: fixed;
         }
 
-        /* Stylizacja tytułów i nagłówków */
+        /* Stylizacja tytułów i nagłówków - białe czcionki */
         h1, h2, h3 {
             color: #FFFFFF;
             text-align: center;
@@ -34,7 +34,7 @@ def add_custom_css():
             color: #FFFFFF;
         }
 
-        /* Stylizacja suwaków i przycisków */
+        /* Stylizacja przycisków */
         .stButton button {
             background-color: #0066FF;
             color: white;
@@ -54,7 +54,6 @@ def add_custom_css():
         }
         </style>
     """, unsafe_allow_html=True)
-
 
 add_custom_css()
 
