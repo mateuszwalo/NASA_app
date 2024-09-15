@@ -12,10 +12,6 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score, auc
 import pickle
 
-
-
-
-
 pickle_in_1=open("tree.pkl","rb")
 best_tree=pickle.load(pickle_in_1)
 
@@ -62,8 +58,8 @@ def plot_roc_curve(y_test, y_pred_proba):
 page_bg_img = """
 <style>
 [data-testid="stVerticalBlock"] {
-    background-color: #000000; /* Czarny kolor tła */
-    color: #ffffff; /* Białe napisy */
+    background-color: purple; /* Czarny kolor tła */
+    color: white; /* Białe napisy */
 }
 </style>
 """
