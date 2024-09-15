@@ -65,45 +65,12 @@ with st.sidebar:
     )
     
 html_temp = """
-    <style>
-    /* Jednolite czarne tło */
-    body {
-        background-color: #000000 !important;
-        color: #FFFFFF !important; /* Ustawienie domyślnego koloru tekstu na biały */
-    }
-
-    /* Stylizacja tytułów i nagłówków - białe czcionki */
-    h1, h2, h3 {
-        color: #FFFFFF !important;
-        text-align: center;
-        font-family: 'Helvetica', sans-serif;
-    }
-
-    /* Stylizacja przycisków */
-    .stButton button {
-        background-color: #0066FF !important;
-        color: white !important;
-        font-size: 20px;
-        padding: 10px 20px;
-        border-radius: 8px;
-    }
-
-    /* Stylizacja suwaków */
-    .stSlider .stSliderTrack {
-        background-color: #0044CC !important;
-    }
-
-    /* Wyśrodkowanie elementów */
-    .stSlider, .stButton {
-        text-align: center;
-    }
-    
     /* Nagłówek z czarnym tłem */
     .app-header {
         background-color: #000000;
         color: #FFFFFF;
         padding: 10px;
-        border-radius: 8px;
+        border-radius: 10px;
     }
     </style>
     <div class="app-header">
