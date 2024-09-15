@@ -280,6 +280,12 @@ with st.expander("🎰 Predict your own NEO`s 🎰"):
     if st.button("**Predict**"):
         result = predict_own_neo(absolute_magnitude, estimated_diameter_min, estimated_diameter_max, relative_velocity, miss_distance)
         st.write(f'The output is: {result}')
+        if result == 1:
+            st.write("🚨 Warning! NEO is a threat to Earth! 🚨")
+            st.image("https://media.giphy.com/media/LwIyvaNcnzsD6/giphy.gif", use_column_width=True)
+        else: 
+            st.write("😊 Relax! The Earth is safe!")
+            st.image("https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif", use_column_width=True)
 
     
     
