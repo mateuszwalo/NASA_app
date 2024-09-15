@@ -11,6 +11,13 @@ from imblearn.over_sampling import SMOTE
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, f1_score, cohen_kappa_score,roc_curve, roc_auc_score, auc
 
+def predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance):
+    best_tree=DecisionTreeClassifier(max_depth=20, min_samples_split=2, min_samples_leaf=2, random_state=42)
+    prediction=best_tree.predict(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance)
+    print("Prediction = {prediction}")
+    return prediction
+    
+
 def model_evaluation(classifier, x_test, y_test):
     from sklearn.linear_model import LogisticRegression
     cm = confusion_matrix(y_test, classifier.predict(x_test))
@@ -258,7 +265,17 @@ with st.expander("⚙️ Model training ⚙️"):
 
 with st.expander("🎰 Predict your own NEO`s 🎰"):
     st.info("In this section you can check your own NEOS`s if they are a threat to the earth")
-    st.inf("*Prediction with the best decision tree estimator*")
+    st.info("*Prediction with the best decision tree estimator*")
+    absolute_magnitude=st.slider("Absolute magnitude", min_value=15,max_value=35, value=19, step=1)
+    estimated_diameter_min=st.slider("Estimated diameter min", min_value=0.001, max_value=0.35, value=0.0015, step=0.0001)
+    estimated_diameter_max=st.slider("Estimated diameter max", min_value=0.0025, max_value=0.8,value=0.1, step=0.0001)
+    relative_velocity=st.slider("Relative velocity", min_value=200, max_value=120000,value=1000, step=10)
+    miss_distance=st.slider("Miss distance",min_value=6000, max_value=75000000, value=10000, step=500)
+    predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance)
+    if st.button("**Predict**"):
+        st.succes('The output is {}'.format(result))
+    
+    
     
             
 
