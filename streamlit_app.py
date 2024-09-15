@@ -63,8 +63,13 @@ with st.sidebar:
         **Data:** [Nearest Earth Objects (1910-2024)](https://www.kaggle.com/datasets/ivansher/nasa-nearest-earth-objects-1910-2024)
         """
     )
-st.title("🪐 NASA ML Application 🪐")
-
+#st.title("🪐 NASA ML Application 🪐")
+html_temp = """
+    <div style="background-color:yellow;padding:5px">
+    <h2 style="color:black;text-align:center;">"🪐 NASA ML Application 🪐" </h2>
+    </div>
+    """
+    st.markdown(html_temp,unsafe_allow_html=True)
 st.info(
     """
     **Discover Space's Close Encounters!**\\
