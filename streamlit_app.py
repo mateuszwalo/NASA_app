@@ -267,16 +267,17 @@ with st.expander("⚙️ Model training ⚙️"):
             st.error(f"An error occurred: {str(e)}")
 
 with st.expander("🎰 Predict your own NEO`s 🎰"):
-    st.info("In this section you can check your own NEOS`s if they are a threat to the earth")
+    st.info("In this section you can check your own NEOs if they are a threat to the Earth")
     st.info("*Prediction with the best decision tree estimator*")
-    absolute_magnitude=st.slider("Absolute magnitude", min_value=15,max_value=35, value=19, step=1)
-    estimated_diameter_min=st.slider("Estimated diameter min", min_value=0.001, max_value=0.35, value=0.0015, step=0.0001)
-    estimated_diameter_max=st.slider("Estimated diameter max", min_value=0.0025, max_value=0.8,value=0.1, step=0.0001)
-    relative_velocity=st.slider("Relative velocity", min_value=200, max_value=120000,value=1000, step=10)
-    miss_distance=st.slider("Miss distance",min_value=6000, max_value=75000000, value=10000, step=500)
+    absolute_magnitude = st.slider("Absolute magnitude", min_value=15, max_value=35, value=19, step=1)
+    estimated_diameter_min = st.slider("Estimated diameter min", min_value=0.001, max_value=0.35, value=0.0015, step=0.0001)
+    estimated_diameter_max = st.slider("Estimated diameter max", min_value=0.0025, max_value=0.8, value=0.1, step=0.0001)
+    relative_velocity = st.slider("Relative velocity", min_value=200, max_value=120000, value=1000, step=10)
+    miss_distance = st.slider("Miss distance", min_value=6000, max_value=75000000, value=10000, step=500)
     if st.button("**Predict**"):
-        result=predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance)
-    st.write('The output is {}'.format(result))
+        result = predict_own_neo(absolute_magnitude, estimated_diameter_min, estimated_diameter_max, relative_velocity, miss_distance)
+        st.write(f'The output is: {result}')
+
     
     
     
