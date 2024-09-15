@@ -64,23 +64,7 @@ with st.sidebar:
         """
     )
     
-html_temp = """
-    /* Nagłówek z czarnym tłem */
-    .app-header {
-        background-color: #000000;
-        color: #FFFFFF;
-        padding: 10px;
-        border-radius: 10px;
-    }
-    </style>
-    <div class="app-header">
-        <h1>🪐 NASA ML Application 🪐</h1>
-    </div>
-"""
-st.markdown(html_temp, unsafe_allow_html=True)
-
-
-
+st.title("🪐 NASA ML Application 🪐")
 st.info(
     """
     **Discover Space's Close Encounters!**\\
