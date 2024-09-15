@@ -69,7 +69,6 @@ html_temp = """
     /* Jednolite czarne tło */
     body {
         background-color: #000000 !important;
-        color: #FFFFFF !important; /* Ustawienie domyślnego koloru tekstu na biały */
     }
 
     /* Stylizacja tytułów i nagłówków - białe czcionki */
