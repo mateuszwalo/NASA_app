@@ -274,8 +274,8 @@ with st.expander("🎰 Predict your own NEO`s 🎰"):
     estimated_diameter_max=st.slider("Estimated diameter max", min_value=0.0025, max_value=0.8,value=0.1, step=0.0001)
     relative_velocity=st.slider("Relative velocity", min_value=200, max_value=120000,value=1000, step=10)
     miss_distance=st.slider("Miss distance",min_value=6000, max_value=75000000, value=10000, step=500)
-    predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance)
     if st.button("**Predict**"):
+        result=predict_own_neo(absolute_magnitude,estimated_diameter_min,estimated_diameter_max,relative_velocity,miss_distance)
         st.succes('The output is {}'.format(result))
     
     
